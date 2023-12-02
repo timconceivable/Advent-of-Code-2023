@@ -40,9 +40,6 @@ function partOne(arr) {
             }
          }
          lineStr = arr[line].split("").reverse().join("");
-         if (value.length === 2) { 
-            break;
-         }
       }
       // console.log(value);
       sum += Number(value);
