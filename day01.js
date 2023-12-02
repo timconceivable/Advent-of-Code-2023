@@ -16,16 +16,9 @@ zoneight234
 7pqrstsixteen` */
 
 /* const inputData = `34292
-eightwo
-6tvbdrk4
-rxsbbq59
 tfive7krmfjptnrcjxfmpfzz6frtknvcvfive
-85seventwoone9
-rmfivetkjmsvt6
-ntwonexninednftfzjxxjzpz5eightzvhkqf3
-lzxpgtzflhkdf5
-vmmdpzfourcxcctv9jjzrhttjmg2bvhhqxxsmz4` */
-
+vmmdpzfourcxcctv9jjzrhttjmg2bvhhqxxsmz4
+1234567898765432123` */
 
 // INPUT DATA
 const inputData = fs.readFileSync('./day01-input.txt', 'utf8');
@@ -65,7 +58,7 @@ function partTwo(arr) {
       let lineStr = arr[line];
       // console.log(lineStr);
       let value = "";
-      let index = 999;
+      let index = lineStr.length;
       let digit = 0;
       while (value.length < 2) {
          for (n in nums) {
@@ -103,5 +96,5 @@ function partTwo(arr) {
    return sum;
 }
 
-console.log(partOne(dataArray));
-console.log(partTwo(dataArray));
+console.log(`part 1: ${partOne(dataArray)}`);
+console.log(`part 2: ${partTwo(dataArray)}`);
