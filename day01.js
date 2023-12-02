@@ -27,19 +27,17 @@ const dataArray = inputData.split("\n");
 // PART 1 SOLUTION
 function partOne(arr) {
    let sum = 0;
-   for (line in arr) {
-      let lineStr = arr[line];
+   for (let line of arr) {
       let value = "";
       for (let loop = 0; loop < 2; loop++) {
-         // console.log(lineStr);
-         for (i in lineStr) {
-            let char = lineStr.charAt(i);
+         // console.log(line);
+         for (let char of line) {
             if (!isNaN(char)) {
                value += char;
                break;
             }
          }
-         lineStr = arr[line].split("").reverse().join("");
+         line = line.split("").reverse().join("");
       }
       // console.log(value);
       sum += Number(value);
@@ -51,24 +49,22 @@ function partOne(arr) {
 function partTwo(arr) {
    let nums = [1,2,3,4,5,6,7,8,9,"one","two","three","four","five","six","seven","eight","nine"];
    let sum = 0;
-   for (line in arr) {
-      let lineStr = arr[line];
-      // console.log(lineStr);
+   for (let line of arr) {
+      // console.log(line);
       let value = "";
-      let index = lineStr.length;
+      let index = line.length;
       let digit = 0;
       while (value.length < 2) {
-         for (n in nums) {
-            let num = nums[n];
-            if (lineStr.includes(num)) {
+         for (let num of nums) {
+            if (line.includes(num)) {
                if ((value.length) < 1) {
-                  if (lineStr.indexOf(num) < index) {
-                     index = lineStr.indexOf(num);
+                  if (line.indexOf(num) < index) {
+                     index = line.indexOf(num);
                      digit = num;
                   } 
                } else {
-                  if (lineStr.lastIndexOf(num) > index) {
-                     index = lineStr.lastIndexOf(num);
+                  if (line.lastIndexOf(num) > index) {
+                     index = line.lastIndexOf(num);
                      digit = num;
                   }
                }
