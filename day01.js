@@ -1,13 +1,13 @@
 const fs = require('node:fs');
 
 // PART 1 TEST DATA
-/* let inputData = `1abc2
+/* const inputData = `1abc2
 pqr3stu8vwx
 a1b2c3d4e5f
 treb7uchet` */
 
 // PART 2 TEST DATA
-/* let inputData = `two1nine
+/* const inputData = `two1nine
 eightwothree
 abcone2threexyz
 xtwone3four
@@ -15,29 +15,93 @@ xtwone3four
 zoneight234
 7pqrstsixteen` */
 
+/* const inputData = `34292
+eightwo
+6tvbdrk4
+rxsbbq59
+tfive7krmfjptnrcjxfmpfzz6frtknvcvfive
+85seventwoone9
+rmfivetkjmsvt6
+ntwonexninednftfzjxxjzpz5eightzvhkqf3
+lzxpgtzflhkdf5
+vmmdpzfourcxcctv9jjzrhttjmg2bvhhqxxsmz4` */
+
+
 // INPUT DATA
 const inputData = fs.readFileSync('./day01-input.txt', 'utf8');
 const dataArray = inputData.split("\n");
 
-let sum = 0;
-for (line in dataArray) {
-   let lineStr = dataArray[line]
-   let value = "";
-   for (let loop = 0; loop < 2; loop++) {
-      // console.log(lineStr);
-      for (i in lineStr) {
-         let char = lineStr.charAt(i);
-         if (!isNaN(char)) {
-            value += char;
+// PART 1 SOLUTION
+function partOne(arr) {
+   let sum = 0;
+   for (line in arr) {
+      let lineStr = arr[line];
+      let value = "";
+      for (let loop = 0; loop < 2; loop++) {
+         // console.log(lineStr);
+         for (i in lineStr) {
+            let char = lineStr.charAt(i);
+            if (!isNaN(char)) {
+               value += char;
+               break;
+            }
+         }
+         lineStr = arr[line].split("").reverse().join("");
+         if (value.length === 2) { 
             break;
          }
       }
-      lineStr = dataArray[line].split("").reverse().join("");
-      if (value.length === 2) { 
-         break;
-      }
+      // console.log(value);
+      sum += Number(value);
    }
-   // console.log(value);
-   sum += Number(value);
+   return sum;
 }
-console.log(sum);
+
+// PART 2 SOLUTION
+function partTwo(arr) {
+   let nums = [1,2,3,4,5,6,7,8,9,"one","two","three","four","five","six","seven","eight","nine"];
+   let sum = 0;
+   for (line in arr) {
+      let lineStr = arr[line];
+      // console.log(lineStr);
+      let value = "";
+      let index = 999;
+      let digit = 0;
+      while (value.length < 2) {
+         for (n in nums) {
+            let num = nums[n];
+            if (lineStr.includes(num)) {
+               if ((value.length) < 1) {
+                  if (lineStr.indexOf(num) < index) {
+                     index = lineStr.indexOf(num);
+                     digit = num;
+                  } 
+               } else {
+                  if (lineStr.lastIndexOf(num) > index) {
+                     index = lineStr.lastIndexOf(num);
+                     digit = num;
+                  }
+               }
+            }
+         }
+         if (isNaN(digit)) {
+            if (digit == "one") { digit = 1; }
+            if (digit == "two") { digit = 2; }
+            if (digit == "three") { digit = 3; }
+            if (digit == "four") { digit = 4; }
+            if (digit == "five") { digit = 5; }
+            if (digit == "six") { digit = 6; }
+            if (digit == "seven") { digit = 7; }
+            if (digit == "eight") { digit = 8; }
+            if (digit == "nine") { digit = 9; }
+         }
+         // console.log(digit);
+         value += digit; 
+      }
+      sum += Number(value);
+   }
+   return sum;
+}
+
+console.log(partOne(dataArray));
+console.log(partTwo(dataArray));
